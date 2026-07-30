@@ -1,84 +1,191 @@
-💰 Kuber(LIVE AT : https://manishshaw5555.github.io/Kuber/)
+# 💰 Kuber
 
-Kuber is a lightweight personal finance dashboard built with React and Vite. It provides a clean, single-page experience for tracking transactions, analyzing monthly performance, and exploring spending patterns — all without requiring a backend.
+> A lightweight personal finance dashboard built with **React** and **Vite** for tracking transactions, analyzing spending, and exploring financial insights — all without a backend.
 
-🚀 Features
-📊 Overview dashboard with balance, income, expense, and savings cards
-📄 Transactions table with search, filtering, sorting, and pagination
-📈 Insights page with category summaries and monthly comparisons
-➕ Add, ✏️ edit, and 🗑️ delete transactions
-📤 CSV export for transaction data
-🌗 Light/Dark theme toggle
-👤 Admin & Viewer role-based UI behavior
-🌱 Seeded demo data (including current month transactions)
-✨ Subtle UI animations for better UX
+<p align="center">
+  <a href="https://manishshw.github.io/Kuber/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Kuber-2ea44f?style=for-the-badge" alt="Live Demo">
+  </a>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React">
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite" alt="Vite">
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License">
+</p>
 
-🛠️ Tech Stack
-React 19
-Vite 8
-Recharts
-Plain CSS + Inline Styles
-Browser localStorage (for persistence)
+## 🌐 Live Demo
 
-📦 Setup & Installation
-Prerequisites
-Node.js (v18+ recommended)
-npm
-Install dependencies
-npm install
-Start development server
-npm run dev
+👉 **https://manishshw.github.io/Kuber/**
 
-App will be available at:
+---
 
-http://localhost:5173
-Build for production
-npm run build
-Preview production build
-npm run preview
-Run linting
-npm run lint
-⚙️ How It Works
+## 📸 Preview
 
-Kuber is a frontend-only application:
+> Add screenshots or GIFs here.
 
-On first load, transactions are initialized from:
+```text
+README.md
+├── screenshot-dashboard.png
+├── screenshot-transactions.png
+└── screenshot-insights.png
+```
 
-src/utils/constants.js
+Example:
 
-After that, all data is stored in:
+```markdown
+![Dashboard](./screenshots/dashboard.png)
 
-localStorage → kuber_txs
+![Transactions](./screenshots/transactions.png)
 
-This ensures:
+![Insights](./screenshots/insights.png)
+```
 
-No backend required
-Data persists across refreshes
-🧩 Project Structure
+---
+
+# ✨ Features
+
+- 📊 Dashboard with Balance, Income, Expense & Savings cards
+- 📄 Transaction management with:
+  - Search
+  - Filtering
+  - Sorting
+  - Pagination
+- 📈 Monthly analytics and spending insights
+- ➕ Add new transactions
+- ✏️ Edit existing transactions
+- 🗑️ Delete transactions
+- 📤 Export transactions to CSV
+- 🌗 Light / Dark mode
+- 👤 Admin & Viewer role support
+- 🌱 Seeded demo transactions
+- ✨ Smooth UI animations
+- 💾 Persistent storage using localStorage
+
+---
+
+# 🛠 Tech Stack
+
+| Technology | Purpose |
+|------------|----------|
+| React 19 | UI Library |
+| Vite 8 | Build Tool |
+| Recharts | Charts & Graphs |
+| CSS | Styling |
+| localStorage | Data Persistence |
+
+---
+
+# 📂 Project Structure
+
+```text
 src/
 │
-├── App.jsx                  # Main app shell
+├── App.jsx
+│
 ├── components/
-│   ├── Overview.jsx         # Dashboard summary
-│   ├── Transactions.jsx     # Transaction management
-│   ├── Insights.jsx         # Analytics & charts
-│   └── TxModal.jsx          # Add/Edit modal
+│   ├── Overview.jsx
+│   ├── Transactions.jsx
+│   ├── Insights.jsx
+│   └── TxModal.jsx
 │
 ├── utils/
-│   ├── constants.js         # Seed data & categories
-│   └── helpers.js           # Utility functions
+│   ├── constants.js
+│   └── helpers.js
 │
-└── index.css               # Global styles
-🧠 Architecture Approach
-Keep state centralized in the app shell
-Use localStorage instead of backend
-Build small, focused components
-Use reusable helper utilities
-Keep UI simple and clean with minimal animations
-📊 Data Model
+└── index.css
+```
 
-Each transaction follows this structure:
+---
 
+# 🚀 Getting Started
+
+## Prerequisites
+
+- Node.js 18+
+- npm
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/manishshw/Kuber.git
+
+cd Kuber
+
+npm install
+```
+
+---
+
+## Start Development Server
+
+```bash
+npm run dev
+```
+
+Open
+
+```
+http://localhost:5173
+```
+
+---
+
+## Build
+
+```bash
+npm run build
+```
+
+---
+
+## Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## Run Linter
+
+```bash
+npm run lint
+```
+
+---
+
+# ⚙️ How It Works
+
+Kuber is a **frontend-only** application.
+
+### First Launch
+
+Transactions are initialized from
+
+```text
+src/utils/constants.js
+```
+
+### Afterwards
+
+Data is automatically stored in
+
+```text
+localStorage
+└── kuber_txs
+```
+
+This provides
+
+- ✅ No backend required
+- ✅ Instant performance
+- ✅ Data persists after refresh
+
+---
+
+# 📊 Data Model
+
+```javascript
 {
   id: 26,
   desc: "Monthly Salary",
@@ -87,20 +194,97 @@ Each transaction follows this structure:
   cat: "Salary",
   date: "2026-04-02"
 }
-Supported Types
-income
-expense
-transfer
-🧪 Development Notes
-🔄 Reset data: clear kuber_txs from localStorage
-🔐 Role selector controls permissions (Admin vs Viewer)
-🎨 Styling uses inline styles + index.css
-🔮 Future Improvements
-🌐 Backend integration (database + API)
-🔑 Authentication system
-✅ Better validation & error handling
-📥 CSV import support
-🔁 Recurring transactions
-🎯 Budgeting & financial goals
-🧪 Automated testing
-📄 License
+```
+
+## Supported Types
+
+| Type |
+|------|
+| income |
+| expense |
+| transfer |
+
+---
+
+# 🧠 Architecture
+
+The application follows a simple architecture:
+
+- Centralized state management in `App.jsx`
+- Small reusable components
+- Helper utility functions
+- Browser localStorage persistence
+- Frontend-only design
+- Minimal and clean UI
+
+---
+
+# 🧪 Development Notes
+
+### Reset Data
+
+Delete
+
+```text
+localStorage
+└── kuber_txs
+```
+
+or clear browser storage.
+
+### Role Selector
+
+- 👤 Admin → Full CRUD permissions
+- 👀 Viewer → Read-only access
+
+---
+
+# 🔮 Future Improvements
+
+- 🌐 Backend API integration
+- 🔑 Authentication
+- 📥 CSV Import
+- 🔁 Recurring Transactions
+- 🎯 Budget Planning
+- 📈 Financial Goals
+- ✅ Better Validation
+- 🧪 Automated Testing
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature/NewFeature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add New Feature"
+```
+
+4. Push the branch
+
+```bash
+git push origin feature/NewFeature
+```
+
+5. Open a Pull Request
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+<p align="center">
+Made with ❤️ using React + Vite
+</p>
