@@ -7,7 +7,7 @@ import Transactions from "./components/Transactions";
 import Insights from "./components/Insights";
 import TxModal from "./components/TxModal";
 import Toast from "./components/Toast";
-import { SEED } from "./utils/constants";
+import { SEED, SEED_VERSION } from "./utils/constants";
 
 const S = {
   app: {
@@ -311,11 +311,65 @@ const S = {
   },
 };
 
+const LEGACY_SEED_SIGNATURES = [
+  "1|Monthly Salary|85000|income|Salary|2026-03-28",
+  "2|Freelance Web Project|22000|income|Freelance|2026-03-20",
+  "3|Amazon Shopping|3200|expense|Shopping|2026-03-18",
+  "4|Food Delivery|890|expense|Food & Dining|2026-03-17",
+  "5|Netflix|499|expense|Entertainment|2026-03-15",
+  "6|Uber Rides|1200|expense|Transport|2026-03-14",
+  "7|Electricity Bill|2100|expense|Utilities|2026-03-12",
+  "8|Mutual Fund SIP|10000|expense|Investment|2026-03-10",
+  "9|Grocery Basket|3500|expense|Food & Dining|2026-03-09",
+  "10|Monthly Salary|85000|income|Salary|2026-02-28",
+  "11|Freelance Logo Design|8000|income|Freelance|2026-02-22",
+  "12|Flipkart Order|5600|expense|Shopping|2026-02-20",
+  "13|Doctor Visit|800|expense|Healthcare|2026-02-15",
+  "14|Udemy Course|1299|expense|Education|2026-02-10",
+  "15|Family Restaurant|2800|expense|Food & Dining|2026-02-08",
+  "16|Petrol|1500|expense|Transport|2026-02-05",
+  "17|Monthly Salary|85000|income|Salary|2026-01-30",
+  "18|Internet Bill|899|expense|Utilities|2026-01-25",
+  "19|Book Purchase|650|expense|Education|2026-01-20",
+  "20|Dividend Income|4200|income|Investment|2026-01-15",
+  "21|Gym Membership|2000|expense|Healthcare|2026-01-10",
+  "22|Monthly Salary|85000|income|Salary|2025-12-30",
+  "23|Year-end Bonus|30000|income|Salary|2025-12-28",
+  "24|Holiday Shopping|12000|expense|Shopping|2025-12-22",
+  "25|New Year Party|5000|expense|Entertainment|2025-12-31",
+  "26|Monthly Salary|85000|income|Salary|2026-04-02",
+  "27|Freelance Dashboard Revamp|18000|income|Freelance|2026-04-04",
+  "28|BigBasket Groceries|2860|expense|Food & Dining|2026-04-05",
+  "29|Metro Card Recharge|1200|expense|Transport|2026-04-03",
+  "30|Electricity Bill|2240|expense|Utilities|2026-04-01",
+  "31|Weekend Movie|760|expense|Entertainment|2026-04-05",
+  "32|Mutual Fund SIP|10000|expense|Investment|2026-04-04",
+  "33|Pharmacy Purchase|680|expense|Healthcare|2026-04-02",
+];
+
+const txSignature = (tx) => [tx.id, tx.desc, tx.amount, tx.type, tx.cat, tx.date].join("|");
+
+const isLegacySeedData = (txs) =>
+  Array.isArray(txs) &&
+  txs.length === LEGACY_SEED_SIGNATURES.length &&
+  txs.every((tx, index) => txSignature(tx) === LEGACY_SEED_SIGNATURES[index]);
+
 export default function App() {
   const [txs, setTxs] = useState(() => {
     try {
       const saved = localStorage.getItem("kuber_txs");
-      return saved ? JSON.parse(saved) : SEED;
+      if (!saved) {
+        localStorage.setItem("kuber_seed_version", SEED_VERSION);
+        return SEED;
+      }
+
+      const parsed = JSON.parse(saved);
+      if (localStorage.getItem("kuber_seed_version") !== SEED_VERSION && isLegacySeedData(parsed)) {
+        localStorage.setItem("kuber_seed_version", SEED_VERSION);
+        return SEED;
+      }
+
+      return parsed;
     } catch {
       return SEED;
     }
