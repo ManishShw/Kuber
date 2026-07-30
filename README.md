@@ -19,24 +19,14 @@
 
 ## 📸 Preview
 
-> Add screenshots or GIFs here.
 
-```text
-README.md
-├── screenshot-dashboard.png
-├── screenshot-transactions.png
-└── screenshot-insights.png
-```
 
-Example:
-
-```markdown
 ![Dashboard](./screenshots/dashboard.png)
 
 ![Transactions](./screenshots/transactions.png)
 
 ![Insights](./screenshots/insights.png)
-```
+
 
 ---
 
