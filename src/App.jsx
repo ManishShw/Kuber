@@ -354,6 +354,18 @@ const isLegacySeedData = (txs) =>
   txs.length === LEGACY_SEED_SIGNATURES.length &&
   txs.every((tx, index) => txSignature(tx) === LEGACY_SEED_SIGNATURES[index]);
 
+const getNextTxId = (txs) => {
+  const existingIds = new Set(txs.map((tx) => tx.id));
+  const maxReadableId = txs.reduce((max, tx) => {
+    const id = Number(tx.id);
+    return Number.isInteger(id) && id > 0 && id < 100000 ? Math.max(max, id) : max;
+  }, 0);
+
+  let nextId = maxReadableId + 1;
+  while (existingIds.has(nextId)) nextId += 1;
+  return nextId;
+};
+
 export default function App() {
   const [txs, setTxs] = useState(() => {
     try {
@@ -423,7 +435,7 @@ export default function App() {
         setTxs((prev) => prev.map((tx) => (tx.id === form.id ? { ...tx, ...form } : tx)));
         showToast("Transaction updated");
       } else {
-        setTxs((prev) => [{ ...form, id: Date.now() }, ...prev]);
+        setTxs((prev) => [{ ...form, id: getNextTxId(prev) }, ...prev]);
         showToast("Transaction added");
       }
       setModal(null);
@@ -442,7 +454,7 @@ export default function App() {
 
   const exportCSV = useCallback(() => {
     const headers = ["ID", "Description", "Amount", "Type", "Category", "Date"];
-    const rows = txs.map((tx) => [tx.id, tx.desc, tx.amount, tx.type, tx.cat, tx.date]);
+    const rows = txs.map((tx, index) => [index + 1, tx.desc, tx.amount, tx.type, tx.cat, tx.date]);
     const csv = [headers, ...rows]
       .map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(","))
       .join("\n");
