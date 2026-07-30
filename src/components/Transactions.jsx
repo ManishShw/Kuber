@@ -28,8 +28,8 @@ export default function Transactions({ txs, role, onEdit, onDelete, S }) {
     });
 
     rows.sort((a, b) => {
-      if (sortKey === "date") return sortDir * (new Date(b.date) - new Date(a.date));
-      if (sortKey === "amount") return sortDir * (b.amount - a.amount);
+      if (sortKey === "date") return sortDir * (new Date(a.date) - new Date(b.date));
+      if (sortKey === "amount") return sortDir * (a.amount - b.amount);
       if (sortKey === "desc") return sortDir * a.desc.localeCompare(b.desc);
       if (sortKey === "cat") return sortDir * a.cat.localeCompare(b.cat);
       if (sortKey === "type") return sortDir * a.type.localeCompare(b.type);
